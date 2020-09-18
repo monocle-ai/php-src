@@ -411,7 +411,7 @@ finish:
 
 	/* protocol version we are speaking */
 	if (context && (tmpzval = php_stream_context_get_option(context, "http", "protocol_version")) != NULL) {
-		char *protocol_version;
+		char *protocol_version = (void*)0;
 		spprintf(&protocol_version, 0, "%.1F", zval_get_double(tmpzval));
 
 		smart_str_appends(&req_buf, " HTTP/");
