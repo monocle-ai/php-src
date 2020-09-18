@@ -123,7 +123,7 @@ static void userfilter_dtor(php_stream_filter *thisfilter)
 {
 	zval *obj = &thisfilter->abstract;
 	zval func_name;
-	zval retval;
+	zval retval = {};
 
 	if (obj == NULL) {
 		/* If there's no object associated then there's nothing to dispose of */
@@ -259,7 +259,7 @@ static php_stream_filter *user_filter_factory_create(const char *filtername,
 	php_stream_filter *filter;
 	zval obj, zfilter;
 	zval func_name;
-	zval retval;
+	zval retval = {};
 	size_t len;
 
 	/* some sanity checks */
