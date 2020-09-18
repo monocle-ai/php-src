@@ -662,7 +662,7 @@ static void sapi_cli_server_register_variable(zval *track_vars_array, const char
 static int sapi_cli_server_register_entry_cb(char **entry, int num_args, va_list args, zend_hash_key *hash_key) /* {{{ */ {
 	zval *track_vars_array = va_arg(args, zval *);
 	if (hash_key->key) {
-		char *real_key, *key;
+		char *real_key = (void*)0, *key;
 		uint32_t i;
 		key = estrndup(ZSTR_VAL(hash_key->key), ZSTR_LEN(hash_key->key));
 		for(i=0; i<ZSTR_LEN(hash_key->key); i++) {
@@ -708,20 +708,20 @@ static void sapi_cli_server_register_variables(zval *track_vars_array) /* {{{ */
 		}
 	}
 	{
-		char *tmp;
+		char *tmp = (void*)0;
 		spprintf(&tmp, 0, "PHP %s Development Server", PHP_VERSION);
 		sapi_cli_server_register_variable(track_vars_array, "SERVER_SOFTWARE", tmp);
 		efree(tmp);
 	}
 	{
-		char *tmp;
+		char *tmp = (void*)0;
 		spprintf(&tmp, 0, "HTTP/%d.%d", client->request.protocol_version / 100, client->request.protocol_version % 100);
 		sapi_cli_server_register_variable(track_vars_array, "SERVER_PROTOCOL", tmp);
 		efree(tmp);
 	}
 	sapi_cli_server_register_variable(track_vars_array, "SERVER_NAME", client->server->host);
 	{
-		char *tmp;
+		char *tmp = (void*)0;
 		spprintf(&tmp, 0, "%i",  client->server->port);
 		sapi_cli_server_register_variable(track_vars_array, "SERVER_PORT", tmp);
 		efree(tmp);
@@ -739,7 +739,7 @@ static void sapi_cli_server_register_variables(zval *track_vars_array) /* {{{ */
 		sapi_cli_server_register_variable(track_vars_array, "PATH_INFO", client->request.path_info);
 	}
 	if (client->request.path_info_len) {
-		char *tmp;
+		char *tmp = (void*)0;
 		spprintf(&tmp, 0, "%s%s", client->request.vpath, client->request.path_info);
 		sapi_cli_server_register_variable(track_vars_array, "PHP_SELF", tmp);
 		efree(tmp);
