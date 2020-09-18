@@ -589,7 +589,7 @@ int php_init_config(void)
 		/* Otherwise search for php-%sapi-module-name%.ini file in search path */
 		if (!fp) {
 			const char *fmt = "php-%s.ini";
-			char *ini_fname;
+			char *ini_fname = (void*)0;
 			spprintf(&ini_fname, 0, fmt, sapi_module.name);
 			fp = php_fopen_with_path(ini_fname, "r", php_ini_search_path, &opened_path);
 			efree(ini_fname);
