@@ -824,8 +824,8 @@ ZEND_FUNCTION(get_object_vars)
 				/* This case is only possible due to loopholes, e.g. ArrayObject */
 				zend_hash_index_add(Z_ARRVAL_P(return_value), num_key, value);
 			} else if (!is_dynamic && ZSTR_VAL(key)[0] == 0) {
-				const char *prop_name, *class_name;
-				size_t prop_len;
+				const char *prop_name = (void*)0, *class_name;
+				size_t prop_len = 0;
 				zend_unmangle_property_name_ex(key, &class_name, &prop_name, &prop_len);
 				/* We assume here that a mangled property name is never
 				 * numeric. This is probably a safe assumption, but
