@@ -696,7 +696,7 @@ static ssize_t php_userstreamop_read(php_stream *stream, char *buf, size_t count
 static int php_userstreamop_close(php_stream *stream, int close_handle)
 {
 	zval func_name;
-	zval retval;
+	zval retval = {};
 	php_userstream_data_t *us = (php_userstream_data_t *)stream->abstract;
 
 	assert(us != NULL);
@@ -1412,7 +1412,7 @@ static ssize_t php_userstreamop_readdir(php_stream *stream, char *buf, size_t co
 static int php_userstreamop_closedir(php_stream *stream, int close_handle)
 {
 	zval func_name;
-	zval retval;
+	zval retval = {};
 	php_userstream_data_t *us = (php_userstream_data_t *)stream->abstract;
 
 	assert(us != NULL);
@@ -1438,7 +1438,7 @@ static int php_userstreamop_closedir(php_stream *stream, int close_handle)
 static int php_userstreamop_rewinddir(php_stream *stream, zend_off_t offset, int whence, zend_off_t *newoffs)
 {
 	zval func_name;
-	zval retval;
+	zval retval = {};
 	php_userstream_data_t *us = (php_userstream_data_t *)stream->abstract;
 
 	ZVAL_STRINGL(&func_name, USERSTREAM_DIR_REWIND, sizeof(USERSTREAM_DIR_REWIND)-1);
