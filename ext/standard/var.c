@@ -235,7 +235,7 @@ static void zval_array_element_dump(zval *zv, zend_ulong index, zend_string *key
 
 static void zval_object_property_dump(zend_property_info *prop_info, zval *zv, zend_ulong index, zend_string *key, int level) /* {{{ */
 {
-	const char *prop_name, *class_name;
+	const char *prop_name = (void*)0, *class_name = (void*)0;
 
 	if (key == NULL) { /* numeric key */
 		php_printf("%*c[" ZEND_LONG_FMT "]=>\n", level + 1, ' ', index);
@@ -438,8 +438,8 @@ static void php_object_element_export(zval *zv, zend_ulong index, zend_string *k
 {
 	buffer_append_spaces(buf, level + 2);
 	if (key != NULL) {
-		const char *class_name, *prop_name;
-		size_t prop_name_len;
+		const char *class_name, *prop_name = (void*)0;
+		size_t prop_name_len = 0;
 		zend_string *pname_esc;
 
 		zend_unmangle_property_name_ex(key, &class_name, &prop_name, &prop_name_len);
