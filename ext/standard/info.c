@@ -260,7 +260,7 @@ char* php_get_windows_name()
 	OSVERSIONINFOEX osvi = EG(windows_version_info);
 	SYSTEM_INFO si;
 	DWORD dwType;
-	char *major = NULL, *sub = NULL, *retval;
+	char *major = NULL, *sub = NULL, *retval = (void*)0;
 
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 
@@ -858,7 +858,7 @@ PHPAPI ZEND_COLD void php_print_info(int flag)
 
 		{
 			const zend_multibyte_functions *functions = zend_multibyte_get_functions();
-			char *descr;
+			char *descr = (void*)0;
 			if (functions) {
 				spprintf(&descr, 0, "provided by %s", functions->provider_name);
 			} else {
